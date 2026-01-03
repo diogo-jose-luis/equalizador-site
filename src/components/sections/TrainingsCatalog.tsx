@@ -1,106 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
-type Course = {
-  title: string;
-  category: string;
-  duration: string;
-  students?: number;
-  lessons?: number;
-  rating?: number; // 0..5
-  price?: string;
-  image: string;
-};
-
-// Podes importar do teu ficheiro de dados se preferires.
-// Aqui deixei a mesma base que já tens.
-const courses: Course[] = [
-  {
-    title: "CCNA – Cisco Certified Network Associate (200-301)",
-    category: "Networking",
-    duration: "• 40h",
-    students: 250,
-    lessons: 18,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/ccna.png",
-  },
-  {
-    title: "CompTIA Security+ (SY0-701)",
-    category: "Certificações IT",
-    duration: "• 35h",
-    students: 180,
-    lessons: 16,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/securityplus.png",
-  },
-  {
-    title: "LPIC-1 – Linux System Administrator (102-500)",
-    category: "Certificações IT",
-    duration: "• 45h",
-    students: 160,
-    lessons: 20,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/lpic1.png",
-  },
-  {
-    title: "VMware VCP-DCV 2024",
-    category: "Cloud Computing",
-    duration: "• 30h",
-    students: 120,
-    lessons: 14,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/vmware.png",
-  },
-  {
-    title: "ITIL® 4 Foundation",
-    category: "Certificações IT",
-    duration: "• 16h",
-    students: 300,
-    lessons: 10,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/itil4.png",
-  },
-  {
-    title: "BST – Basic Safety Training",
-    category: "Offshore",
-    duration: "• 24h",
-    students: 210,
-    lessons: 8,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/bst.png",
-  },
-  {
-    title: "Espaços Confinados (CSE)",
-    category: "Offshore",
-    duration: "• 12h",
-    students: 140,
-    lessons: 6,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/cse.png",
-  },
-  {
-    title: "Power BI Avançado",
-    category: "Office & BI",
-    duration: "• 20h",
-    students: 260,
-    lessons: 12,
-    rating: 5,
-    price: "Sob consulta",
-    image: "/courses/powerbi.png",
-  },
-];
+import { courses } from "@/data/courses";
+import type { Course } from "@/types/course";
 
 type SortKey = "default" | "title_asc" | "students_desc" | "lessons_desc";
 type ViewMode = "grid" | "list";
+
+function getDurationLabel(course: Course) {
+  // compatível com o teu badge antigo "• 40h"
+  return course.durationLabel ?? `• ${course.durationHours}h`;
+}
+
+function getCoverImage(course: Course) {
+  // prioridade: image -> image2 -> image3
+  return course.image || course.image2 || course.image3 || "/courses/placeholder.png";
+}
 
 export default function TrainingsCatalog() {
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
@@ -123,20 +41,22 @@ export default function TrainingsCatalog() {
   const sorted = useMemo(() => {
     const arr = [...filtered];
 
-    if (sort === "title_asc") {
+    if (sort == "title_asc") {
       arr.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sort === "students_desc") {
+    } else if (sort == "students_desc") {
       arr.sort((a, b) => (b.students ?? 0) - (a.students ?? 0));
-    } else if (sort === "lessons_desc") {
-      arr.sort((a, b) => (b.lessons ?? 0) - (a.lessons ?? 0));
+    } else if (sort == "lessons_desc") {
+      arr.sort((a, b) => (b.lessonsCount ?? 0) - (a.lessonsCount ?? 0));
     }
 
     return arr;
   }, [filtered, sort]);
 
+  // contagens corretas mesmo quando filtras
   const total = courses.length;
-  const showingFrom = total ? 1 : 0;
+  const showingFrom = sorted.length ? 1 : 0;
   const showingTo = sorted.length;
+  const showingTotal = filtered.length;
 
   const toggleCat = (cat: string) => {
     setSelectedCats((prev) =>
@@ -203,7 +123,7 @@ export default function TrainingsCatalog() {
               </div>
             </div>
 
-            {/* mini card de dica (opcional, discreto) */}
+            {/* mini card de dica */}
             <div className="mt-6 rounded-[26px] bg-[linear-gradient(135deg,rgba(0,156,249,0.10),rgba(0,169,157,0.08))] ring-1 ring-black/5 p-6">
               <div className="text-sm font-semibold text-neutral-900">
                 Precisas de ajuda a escolher?
@@ -211,18 +131,18 @@ export default function TrainingsCatalog() {
               <div className="mt-2 text-sm text-neutral-600">
                 Diz-nos o teu objetivo e recomendamos a trilha ideal.
               </div>
-              <a
+              <Link
                 href="/contacto"
                 className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-primary hover:opacity-90"
               >
                 Falar connosco <ArrowRightSmall />
-              </a>
+              </Link>
             </div>
           </aside>
 
           {/* RIGHT: lista de cursos */}
           <main className="lg:col-span-9">
-            {/* Top bar (como screenshot) */}
+            {/* Top bar */}
             <div className="rounded-[22px] bg-white ring-1 ring-black/5 shadow-[0_12px_40px_rgba(0,0,0,0.06)] px-5 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="text-sm text-neutral-600">
                 Mostrando{" "}
@@ -230,7 +150,9 @@ export default function TrainingsCatalog() {
                   {showingFrom}–{showingTo}
                 </span>{" "}
                 de{" "}
-                <span className="font-semibold text-neutral-900">{total}</span>{" "}
+                <span className="font-semibold text-neutral-900">
+                  {selectedCats.length ? showingTotal : total}
+                </span>{" "}
                 resultados
               </div>
 
@@ -256,7 +178,7 @@ export default function TrainingsCatalog() {
                     type="button"
                     onClick={() => setView("list")}
                     className={`grid place-items-center size-10 rounded-xl ring-1 transition ${
-                      view === "list"
+                      view == "list"
                         ? "bg-brand-primary text-white ring-brand-primary/30"
                         : "bg-white text-neutral-800 ring-black/10 hover:bg-black/[0.03]"
                     }`}
@@ -268,7 +190,7 @@ export default function TrainingsCatalog() {
                     type="button"
                     onClick={() => setView("grid")}
                     className={`grid place-items-center size-10 rounded-xl ring-1 transition ${
-                      view === "grid"
+                      view == "grid"
                         ? "bg-brand-primary text-white ring-brand-primary/30"
                         : "bg-white text-neutral-800 ring-black/10 hover:bg-black/[0.03]"
                     }`}
@@ -282,7 +204,7 @@ export default function TrainingsCatalog() {
 
             {/* Results */}
             <div className="mt-6">
-              {sorted.length === 0 ? (
+              {sorted.length == 0 ? (
                 <div className="rounded-[26px] bg-white ring-1 ring-black/5 p-10 text-center">
                   <div className="font-heading text-xl text-neutral-900">
                     Sem resultados
@@ -299,16 +221,16 @@ export default function TrainingsCatalog() {
                     Limpar filtros
                   </button>
                 </div>
-              ) : view === "grid" ? (
+              ) : view == "grid" ? (
                 <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                   {sorted.map((course) => (
-                    <CourseCard key={course.title} course={course} />
+                    <CourseCard key={course.id ?? course.slug} course={course} />
                   ))}
                 </div>
               ) : (
                 <div className="space-y-4">
                   {sorted.map((course) => (
-                    <CourseRow key={course.title} course={course} />
+                    <CourseRow key={course.id ?? course.slug} course={course} />
                   ))}
                 </div>
               )}
@@ -323,11 +245,14 @@ export default function TrainingsCatalog() {
 /* --------------------- Cards --------------------- */
 
 function CourseCard({ course }: { course: Course }) {
+  const cover = getCoverImage(course);
+  const duration = getDurationLabel(course);
+
   return (
     <article className="group h-full flex flex-col rounded-2xl bg-white ring-1 ring-black/5 shadow-[0_18px_50px_rgba(0,0,0,0.10)] overflow-hidden">
       <div className="relative aspect-[16/10] bg-black/[0.04]">
         <Image
-          src={course.image}
+          src={cover}
           alt={course.title}
           fill
           className="object-cover"
@@ -336,7 +261,7 @@ function CourseCard({ course }: { course: Course }) {
 
         <div className="absolute left-4 top-4 flex items-center gap-2">
           <span className="rounded-xl bg-brand-primary text-white text-[11px] font-semibold px-3 py-1 shadow">
-            {course.duration}
+            {duration}
           </span>
           <span className="rounded-xl bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-semibold text-neutral-900 ring-1 ring-black/5">
             {course.category}
@@ -363,25 +288,48 @@ function CourseCard({ course }: { course: Course }) {
           </div>
           <div className="inline-flex items-center gap-2">
             <BookMini />
-            <span>{course.lessons ?? 0} módulos</span>
+            <span>{course.modules.length ?? 0} módulos</span>
           </div>
         </div>
 
         <div className="mt-auto pt-5">
           <div className="mb-4 border-t border-dashed border-black/10" />
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="size-9 rounded-full bg-[linear-gradient(135deg,rgba(0,156,249,0.25),rgba(0,169,157,0.22))] ring-1 ring-black/5" />
-              <div className="text-xs leading-tight">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="size-9 shrink-0 rounded-full bg-[linear-gradient(135deg,rgba(0,156,249,0.25),rgba(0,169,157,0.22))] ring-1 ring-black/5" />
+              <div className="text-xs leading-tight min-w-0">
                 <div className="font-semibold text-neutral-900">Equalizador</div>
                 <div className="text-neutral-500">Treinamento</div>
               </div>
             </div>
 
-            <div className="text-sm font-extrabold text-brand-primary">
+            <div className="text-sm font-extrabold text-brand-primary whitespace-nowrap">
               {course.price ?? "Sob consulta"}
             </div>
+          </div>
+
+          <div className="mt-4 flex items-center gap-2">
+            <Link
+              href={`/treinamentos/${course.slug}`}
+              className="flex-1 inline-flex items-center justify-center rounded-2xl px-4 py-3 text-sm font-semibold text-white
+              bg-brand-primary shadow-brand hover:opacity-95 transition"
+            >
+              Ver detalhes <span className="ml-2"><ArrowRightSmall /></span>
+            </Link>
+
+            {course.file_url ? (
+              <a
+                href={course.file_url}
+                target="_blank"
+                rel="noreferrer"
+                className="grid place-items-center size-[46px] rounded-2xl ring-1 ring-black/10 bg-white hover:bg-black/[0.03] transition"
+                aria-label="Baixar programa"
+                title="Baixar programa"
+              >
+                <DownloadIcon />
+              </a>
+            ) : null}
           </div>
         </div>
       </div>
@@ -390,12 +338,15 @@ function CourseCard({ course }: { course: Course }) {
 }
 
 function CourseRow({ course }: { course: Course }) {
+  const cover = getCoverImage(course);
+  const duration = getDurationLabel(course);
+
   return (
     <article className="rounded-2xl bg-white ring-1 ring-black/5 shadow-[0_12px_40px_rgba(0,0,0,0.06)] overflow-hidden">
       <div className="grid md:grid-cols-12 gap-0">
         <div className="md:col-span-4 relative aspect-[16/10] md:aspect-auto md:h-full bg-black/[0.04]">
           <Image
-            src={course.image}
+            src={cover}
             alt={course.title}
             fill
             className="object-cover"
@@ -403,7 +354,7 @@ function CourseRow({ course }: { course: Course }) {
           />
           <div className="absolute left-4 top-4 flex items-center gap-2">
             <span className="rounded-xl bg-brand-primary text-white text-[11px] font-semibold px-3 py-1 shadow">
-              {course.duration}
+              {duration}
             </span>
             <span className="rounded-xl bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-semibold text-neutral-900 ring-1 ring-black/5">
               {course.category}
@@ -438,21 +389,30 @@ function CourseRow({ course }: { course: Course }) {
             </span>
             <span className="inline-flex items-center gap-2">
               <BookMini />
-              {course.lessons ?? 0} módulos
+              {course.lessonsCount ?? 0} módulos
             </span>
           </div>
 
-          <div className="mt-5">
-            <button
-              type="button"
+          <div className="mt-5 flex items-center gap-2">
+            <Link
+              href={`/treinamentos/${course.slug}`}
               className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white
               bg-brand-primary shadow-brand hover:opacity-95 transition"
             >
-              Ver detalhes
-              <span className="ml-2">
-                <ArrowRightSmall />
-              </span>
-            </button>
+              Ver detalhes <span className="ml-2"><ArrowRightSmall /></span>
+            </Link>
+
+            {course.file_url ? (
+              <a
+                href={course.file_url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold
+                ring-1 ring-black/10 bg-white hover:bg-black/[0.03] transition"
+              >
+                Baixar programa <span className="ml-2"><DownloadIcon /></span>
+              </a>
+            ) : null}
           </div>
         </div>
       </div>
@@ -527,6 +487,26 @@ function ArrowRightSmall() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-current">
+      <path
+        d="M12 3v10m0 0 4-4m-4 4-4-4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 17v3h16v-3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
