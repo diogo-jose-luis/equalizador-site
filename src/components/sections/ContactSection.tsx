@@ -79,7 +79,7 @@ export default function ContactSection() {
                   </div>
 
                   <a
-                    href="https://www.google.com/maps/place/Galeria+Tangue+-+Gest-zena,+Lda/@-8.8988848,13.2090862,17z"
+                    href="https://www.google.com/maps/place/EQUALIZADOR+CONSULTORIA+E+TREINAMENTO/@-8.8989708,13.2117135,17z"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-semibold text-neutral-900 ring-1 ring-black/10 bg-white hover:bg-black/[0.03] transition"
@@ -96,7 +96,7 @@ export default function ContactSection() {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     src={
-                      "https://www.google.com/maps?q=Galeria%20Tangue%20Gest-zena%20Lda%20Luanda&z=17&output=embed"
+                      "https://www.google.com/maps?q=EQUALIZADOR+CONSULTORIA+E+TREINAMENTO&z=17&output=embed"
                     }
                   />
                 </div>
