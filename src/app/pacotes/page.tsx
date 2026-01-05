@@ -4,6 +4,16 @@ import Footer from "@/components/sections/Footer";
 import PageBanner from "@/components/sections/PageBanner";
 import TrainingBatches from "@/components/sections/TrainingBatches";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pacotes de Formação",
+  description:
+    "Programas completos e estruturados (Batches) que combinam múltiplas certificações para acelerar a tua carreira.",
+  alternates: { canonical: "/pacotes" },
+};
+
+
 export default function PacotesPage() {
   return (
     <>

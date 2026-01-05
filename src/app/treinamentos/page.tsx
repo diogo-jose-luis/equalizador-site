@@ -4,6 +4,16 @@ import Footer from "@/components/sections/Footer";
 import PageBanner from "@/components/sections/PageBanner";
 import TrainingsCatalog from "@/components/sections/TrainingsCatalog";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Treinamentos",
+  description:
+    "Formações práticas e atualizadas em Tecnologias de Informação, Networking, Cloud, Segurança, Offshore e muito mais.",
+  alternates: { canonical: "/treinamentos" },
+};
+
+
 export default function TreinamentosPage() {
   return (
     <>

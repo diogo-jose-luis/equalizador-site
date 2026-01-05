@@ -7,6 +7,16 @@ import MissionVisionValues from "@/components/sections/MissionVisionValues";
 import PageBanner from "@/components/sections/PageBanner";
 import Testimonials from "@/components/sections/Testimonials";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sobre Nós",
+  description:
+    "Somos a Equalizador: consultoria e formações em TI com foco em prática, performance e resultados.",
+  alternates: { canonical: "/sobre-nos" },
+};
+
+
 export default function SobreNosPage() {
   return (
     <>

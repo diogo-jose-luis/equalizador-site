@@ -4,6 +4,16 @@ import Header from "@/components/layout/Header";
 import PageBanner from "@/components/sections/PageBanner";
 import Footer from "@/components/sections/Footer";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Treinamento",
+  description:
+    "Formações práticas e atualizadas em Tecnologias de Informação, Networking, Cloud, Segurança, Offshore e muito mais.",
+  alternates: { canonical: "/treinamentos" },
+};
+
+
 type Props = { params: { slug: string } };
 
 export function generateStaticParams() {

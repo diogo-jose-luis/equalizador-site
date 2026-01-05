@@ -4,6 +4,16 @@ import Footer from "@/components/sections/Footer";
 import PageBanner from "@/components/sections/PageBanner";
 import ContactSection from "@/components/sections/ContactSection";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contacto",
+  description:
+    "Somos a Equalizador: consultoria e formações em TI com foco em prática, performance e resultados.",
+  alternates: { canonical: "/contacto" },
+};
+
+
 export default function ContactoPage() {
   return (
     <>
