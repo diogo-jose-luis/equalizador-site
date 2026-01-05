@@ -6,7 +6,7 @@ export const ccna200301: Course = {
 
   title: "CCNA – Cisco Certified Network Associate (200-301)",
   shortTitle: "CCNA 200-301",
-  category: "Networking",
+  category: "Redes",
 
   durationHours: 40,
   durationLabel: "• 40h",
@@ -16,9 +16,11 @@ export const ccna200301: Course = {
   rating: 5,
   price: "Sob consulta",
 
+  destaque: true,
+
   image: "/courses/ccna.png",
-  image2: "/courses/ccna2.png",
-  image3: "/courses/ccna.png",
+  image2: "/courses/ccna3.png",
+  image3: "/courses/ccna2.png",
   file_url: "/docs/courses/ccna-200-301.pdf",
 
   description:

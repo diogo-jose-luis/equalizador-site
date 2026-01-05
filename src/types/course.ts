@@ -31,6 +31,8 @@ export type Course = {
   image3: string;
   price?: string;
 
+  destaque?: boolean;
+
   // métricas (catálogo)
   students?: number;
   lessonsCount?: number;

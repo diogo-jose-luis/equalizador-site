@@ -24,6 +24,8 @@ export default function TrainingsCatalog() {
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const [sort, setSort] = useState<SortKey>("default");
   const [view, setView] = useState<ViewMode>("grid");
+  const [q, setQ] = useState(""); // ✅ novo
+
 
   const categories = useMemo(() => {
     const map = new Map<string, number>();
@@ -33,10 +35,28 @@ export default function TrainingsCatalog() {
       .map(([name, count]) => ({ name, count }));
   }, []);
 
-  const filtered = useMemo(() => {
-    if (!selectedCats.length) return courses;
-    return courses.filter((c) => selectedCats.includes(c.category));
-  }, [selectedCats]);
+   const filtered = useMemo(() => {
+    const query = q.trim().toLowerCase();
+
+    return courses.filter((c) => {
+      const catOk = !selectedCats.length || selectedCats.includes(c.category);
+
+      if (!query) return catOk;
+
+      const haystack = [
+        c.title,
+        c.category,
+        c.description,
+        c.slug,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      return catOk && haystack.includes(query);
+    });
+  }, [selectedCats, q]);
+
 
   const sorted = useMemo(() => {
     const arr = [...filtered];
@@ -157,6 +177,38 @@ export default function TrainingsCatalog() {
               </div>
 
               <div className="flex items-center gap-3 justify-between sm:justify-end">
+
+                                {/* Search / Filter */}
+                <div className="flex-1 min-w-[220px]">
+                  <div className="relative">
+                    <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">
+                      <SearchIcon />
+                    </span>
+
+                    <input
+                      value={q}
+                      onChange={(e) => setQ(e.target.value)}
+                      placeholder="Filtrar cursos..."
+                      className="w-full rounded-xl bg-white ring-1 ring-black/10 pl-10 pr-10 py-2 text-sm text-neutral-900 outline-none
+                      focus:ring-2 focus:ring-brand-primary/40"
+                    />
+
+                    {q ? (
+                      <button
+                        type="button"
+                        onClick={() => setQ("")}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center size-7 rounded-lg
+                        text-neutral-500 hover:bg-black/[0.04]"
+                        aria-label="Limpar filtro"
+                        title="Limpar"
+                      >
+                        <XIcon />
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+
+
                 {/* Sort */}
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-neutral-600">Ordenar:</span>
@@ -542,3 +594,30 @@ function ListIcon() {
     </svg>
   );
 }
+
+function SearchIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-current">
+      <path
+        d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function XIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-current">
+      <path
+        d="M18 6 6 18M6 6l12 12"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+

@@ -17,8 +17,8 @@ export default function SobreNosPage() {
         title="Sobre Nós"
         description="Somos a Equalizador: consultoria e formações em TI com foco em prática, performance e resultados."
         images={[
-          { src: "/banners/formador.png", alt: "Formadora" },
-          { src: "/banners/formandos.png", alt: "Formando" },
+          { src: "/banners/nos.png", alt: "Formadora" },
+          { src: "/about/students.png", alt: "Formando" },
         ]}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Sobre Nós" }]}
       />
@@ -28,7 +28,6 @@ export default function SobreNosPage() {
 
       <About />
       <AboutFeaturedStrip />
-      <Instructors />
       <Testimonials />
 
       <Footer />

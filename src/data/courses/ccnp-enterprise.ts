@@ -6,7 +6,7 @@ export const ccnp: Course = {
 
   title: "CCNP ENTERPRISE – Cisco Certified Network Professional",
   shortTitle: "CCNP ENTERPRISE",
-  category: "Networking",
+  category: "Redes",
 
   durationHours: 80,
   durationLabel: "• 80h",
@@ -16,9 +16,11 @@ export const ccnp: Course = {
   rating: 5,
   price: "Sob consulta",
 
+  destaque: true,
+
   image: "/courses/ccnp.png",
-  image2: "/courses/ccnp2.png",
-  image3: "/courses/ccna.png",
+  image2: "/courses/ccnp3.png",
+  image3: "/courses/ccna2.png",
   file_url: "/docs/courses/ccnp-enterprise.pdf",
 
   description:
@@ -49,11 +51,11 @@ export const ccnp: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Modelo OSI e TCP/IP",
-            "Endereçamento IPv4 e máscaras de sub-rede",
-            "Introdução ao IPv6",
-            "Tipos de comunicação: unicast, multicast, broadcast",
-            "Funcionamento básico de switches e routers",
+            "Modelos de design de redes corporativas",
+            "Campus, WAN, Data Center e Cloud",
+            "Alta disponibilidade e redundância",
+            "Virtualização de redes",
+            "Introdução ao SD-Access",
           ],
         },
       ],
@@ -65,11 +67,11 @@ export const ccnp: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Criação e gestão de VLANs",
-            "Trunking (802.1Q) e VTP",
-            "Spanning Tree Protocol (STP/RSTP)",
-            "EtherChannel (LACP/PAgP)",
-            "Troubleshooting de camadas 1, 2 e 3",
+            "VLANs e trunking avançado",
+            "STP (RSTP, MST)",
+            "EtherChannel",
+            "QoS em LAN",
+            "Troubleshooting de switching",
           ],
         },
       ],
@@ -81,11 +83,11 @@ export const ccnp: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Configuração de routing estático",
-            "Introdução e configuração do OSPF",
-            "Fundamentos de EIGRP",
-            "Conceitos de métricas, adjacências e caminhos",
-            "Inter-VLAN Routing e SVI",
+            "OSPF multiárea",
+            "EIGRP avançado",
+            "Fundamentos de BGP",
+            "Redistribuição de rotas (introdução)",
+            "Troubleshooting de routing",
           ],
         },
       ],
@@ -97,11 +99,11 @@ export const ccnp: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "DHCP, DNS, NAT/PAT e ACLs",
-            "Configuração de redes Wireless (WLC e APs)",
-            "Políticas de segurança básicas (AAA, portas seguras, SSH)",
-            "Mitigação de ataques comuns em redes locais",
-            "Planeamento de topologias LAN e WAN",
+            "Arquitetura Wireless Cisco",
+            "WLC, APs e roaming",
+            "Segurança Wireless (WPA2/WPA3)",
+            "Planeamento RF",
+            "Troubleshooting Wireless",
           ],
         },
       ],
@@ -113,11 +115,11 @@ export const ccnp: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Conceitos de automação de redes e APIs",
-            "Introdução ao Cisco DNA Center e SDN",
-            "Ferramentas de automação (Python, Netconf/Restconf – introdução)",
-            "Troubleshooting estruturado (camadas 1 a 4)",
-            "Documentação e boas práticas de gestão de redes",
+            "Tecnologias WAN (MPLS, VPN, SD-WAN)",
+            "Qualidade de Serviço (QoS)",
+            "Monitorização e telemetria",
+            "Infraestrutura resiliente",
+            "Casos práticos empresariais",
           ],
         },
       ],
@@ -129,11 +131,11 @@ export const ccnp: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Conceitos de automação de redes e APIs",
-            "Introdução ao Cisco DNA Center e SDN",
-            "Ferramentas de automação (Python, Netconf/Restconf – introdução)",
-            "Troubleshooting estruturado (camadas 1 a 4)",
-            "Documentação e boas práticas de gestão de redes",
+            "ACLs avançadas",
+            "Firewall e IDS/IPS",
+            "Segmentação e Zero Trust",
+            "Hardening de dispositivos",
+            "Segurança de infraestrutura",
           ],
         },
       ],
@@ -145,11 +147,107 @@ export const ccnp: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Conceitos de automação de redes e APIs",
-            "Introdução ao Cisco DNA Center e SDN",
-            "Ferramentas de automação (Python, Netconf/Restconf – introdução)",
-            "Troubleshooting estruturado (camadas 1 a 4)",
-            "Documentação e boas práticas de gestão de redes",
+            "Conceitos de SDN",
+            "Cisco DNA Center",
+            "APIs REST, JSON",
+            "Introdução à automação com Python",
+            "Casos práticos de automação",
+          ],
+        },
+      ],
+    },
+     {
+      code: "08",
+      title: "OSPF Avançado e Troubleshooting (ENARSI)",
+       lessons: [
+        {
+          title: "Conteúdos",
+          bullets: [
+            "OSPF multiárea avançado",
+            "LSA types e timers",
+            "Autenticação",
+            "Troubleshooting de adjacências",
+            "Otimização de rotas",
+          ],
+        },
+      ],
+    },
+     {
+      code: "09",
+      title: "EIGRP Avançado (ENARSI)",
+       lessons: [
+        {
+          title: "Conteúdos",
+          bullets: [
+            "Métricas avançadas",
+            "Stub routing",
+            "Autenticação",
+            "Load balancing",
+            "Troubleshooting EIGRP",
+          ],
+        },
+      ],
+    },
+     {
+      code: "10",
+      title: "BGP Avançado (ENARSI)",
+       lessons: [
+        {
+          title: "Conteúdos",
+          bullets: [
+            "iBGP e eBGP",
+            "Path attributes",
+            "Route filtering",
+            "Policy control",
+            "Troubleshooting BGP",
+          ],
+        },
+      ],
+    },
+     {
+      code: "11",
+      title: "Redistribuição de Rotas (ENARSI)",
+       lessons: [
+        {
+          title: "Conteúdos",
+          bullets: [
+            "Redistribuição entre protocolos",
+            "Prevenção de loops",
+            "Métricas e tagging",
+            "Casos práticos",
+            "Boas práticas",
+          ],
+        },
+      ],
+    },
+     {
+      code: "12",
+      title: "VPNs, Serviços e Segurança (ENARSI)",
+       lessons: [
+        {
+          title: "Conteúdos",
+          bullets: [
+            "VPN Site-to-Site",
+            "Remote Access VPN",
+            "GRE e IPsec",
+            "Segurança de routing",
+            "Integração WAN",
+          ],
+        },
+      ],
+    },
+     {
+      code: "13",
+      title: "Troubleshooting Avançado de Redes (ENARSI)",
+       lessons: [
+        {
+          title: "Conteúdos",
+          bullets: [
+            "Metodologias estruturadas",
+            "Debugs e análise de logs",
+            "Casos reais de falhas",
+            "Ferramentas Cisco",
+            "Otimização e prevenção",
           ],
         },
       ],

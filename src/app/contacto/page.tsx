@@ -13,8 +13,8 @@ export default function ContactoPage() {
         title="Contacto"
         description="Fala connosco para inscrições, propostas corporativas, consultoria e suporte. Respondemos rápido."
         images={[
-          { src: "/banners/contacto.jpg", alt: "Atendimento e suporte" },
-          { src: "/banners/formandos.png", alt: "Formação e consultoria" },
+          { src: "/banners/nos.png", alt: "Atendimento e suporte" },
+          { src: "/banners/contacto.jpg", alt: "Formação e consultoria" },
         ]}
         breadcrumb={[
           { label: "Home", href: "/" },

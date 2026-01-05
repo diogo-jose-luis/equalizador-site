@@ -6,7 +6,7 @@ export const vmware: Course = {
 
   title: "VMware Datacenter Virtualization Professional(VCP-DCV 2024)",
   shortTitle: "VMware VCP-DCV 2024",
-  category: "Virtualization",
+  category: "Virtualização",
 
   durationHours: 40,
   durationLabel: "• 40h",
@@ -16,9 +16,11 @@ export const vmware: Course = {
   rating: 5,
   price: "Sob consulta",
 
+  destaque: true,
+
   image: "/courses/vmware.png",
-  image2: "/courses/vmware2.png",
-  image3: "/courses/vmware.png",
+  image2: "/courses/vmware3.png",
+  image3: "/courses/vmware2.png",
   file_url: "/docs/courses/vmware.pdf",
 
   description:
@@ -49,11 +51,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Modelo OSI e TCP/IP",
-            "Endereçamento IPv4 e máscaras de sub-rede",
-            "Introdução ao IPv6",
-            "Tipos de comunicação: unicast, multicast, broadcast",
-            "Funcionamento básico de switches e routers",
+            "Conceitos de virtualização e data center definido por software",
+            "Componentes principais do vSphere 8",
+            "Arquitetura ESXi e vCenter",
+            "Licenciamento e modelos de implementação",
+            "Casos de uso típicos para ambientes VMware",
           ],
         },
       ],
@@ -65,11 +67,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Criação e gestão de VLANs",
-            "Trunking (802.1Q) e VTP",
-            "Spanning Tree Protocol (STP/RSTP)",
-            "EtherChannel (LACP/PAgP)",
-            "Troubleshooting de camadas 1, 2 e 3",
+            "Requisitos de hardware e compatibilidade (HCL)",
+            "Instalação do VMware ESXi",
+            "Configuração inicial de rede, storage e serviços",
+            "Gestão de hosts via DCUI e vSphere Client",
+            "Atualização e patching de hosts ESXi",
           ],
         },
       ],
@@ -81,11 +83,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Configuração de routing estático",
-            "Introdução e configuração do OSPF",
-            "Fundamentos de EIGRP",
-            "Conceitos de métricas, adjacências e caminhos",
-            "Inter-VLAN Routing e SVI",
+            "Instalação do vCenter Server Appliance (VCSA)",
+            "Configuração inicial e acesso",
+            "Gestão de clusters, permissões e inventário",
+            "Templates, Content Library e automação básica",
+            "Monitorização e logging no vCenter",
           ],
         },
       ],
@@ -97,11 +99,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "DHCP, DNS, NAT/PAT e ACLs",
-            "Configuração de redes Wireless (WLC e APs)",
-            "Políticas de segurança básicas (AAA, portas seguras, SSH)",
-            "Mitigação de ataques comuns em redes locais",
-            "Planeamento de topologias LAN e WAN",
+            "Criação e configuração de máquinas virtuais",
+            "Recursos de CPU, memória, reservações e limites",
+            "Snapshots, clones e templates",
+            "Políticas de recursos (Resource Pools)",
+            "Gestão do ciclo de vida de VMs",
           ],
         },
       ],
@@ -113,11 +115,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Conceitos de automação de redes e APIs",
-            "Introdução ao Cisco DNA Center e SDN",
-            "Ferramentas de automação (Python, Netconf/Restconf – introdução)",
-            "Troubleshooting estruturado (camadas 1 a 4)",
-            "Documentação e boas práticas de gestão de redes",
+            "Conceitos de networking virtual",
+            "vSwitch Standard: criação e gestão",
+            "Distributed vSwitch: casos de uso e funcionalidades avançadas",
+            "VLANs, NIC teaming e políticas de segurança",
+            "Troubleshooting de redes virtuais",
           ],
         },
       ],
@@ -129,11 +131,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Conceitos de automação de redes e APIs",
-            "Introdução ao Cisco DNA Center e SDN",
-            "Ferramentas de automação (Python, Netconf/Restconf – introdução)",
-            "Troubleshooting estruturado (camadas 1 a 4)",
-            "Documentação e boas práticas de gestão de redes",
+            "Conceitos de storage para VMware",
+            "VMFS, NFS, iSCSI e Fibre Channel",
+            "Configuração de adaptadores e caminhos de acesso",
+            "Introdução ao VMware vSAN",
+            "Gestão de datastores e políticas de armazenamento",
           ],
         },
       ],
@@ -145,11 +147,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Conceitos de automação de redes e APIs",
-            "Introdução ao Cisco DNA Center e SDN",
-            "Ferramentas de automação (Python, Netconf/Restconf – introdução)",
-            "Troubleshooting estruturado (camadas 1 a 4)",
-            "Documentação e boas práticas de gestão de redes",
+            "vMotion e Storage vMotion",
+            "vSphere HA: configuração e funcionamento",
+            "DRS e balanceamento de carga automático",
+            "FT (Fault Tolerance): funcionamento e limitações",
+            "Estratégias de resiliência para data centers",
           ],
         },
       ],
@@ -161,11 +163,11 @@ export const vmware: Course = {
         {
           title: "Conteúdos",
           bullets: [
-            "Conceitos de automação de redes e APIs",
-            "Introdução ao Cisco DNA Center e SDN",
-            "Ferramentas de automação (Python, Netconf/Restconf – introdução)",
-            "Troubleshooting estruturado (camadas 1 a 4)",
-            "Documentação e boas práticas de gestão de redes",
+            "Ferramentas de diagnóstico do vSphere",
+            "Logs e métricas essenciais",
+            "Identificação de gargalos de CPU, RAM, rede e storage",
+            "Recomendações de segurança",
+            "Planeamento, manutenção e boas práticas operacionais",
           ],
         },
       ],
