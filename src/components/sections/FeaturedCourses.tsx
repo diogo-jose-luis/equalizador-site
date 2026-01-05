@@ -10,12 +10,20 @@ import clsx from "clsx";
 import { courses } from "@/data/courses";
 import type { Course } from "@/types/course";
 
+type CourseExtras = {
+  description?: string;
+  destaque?: boolean;
+};
+type CourseWithExtras = Course & CourseExtras;
+
 function getDurationLabel(course: Course) {
   return course.durationLabel ?? `• ${course.durationHours}h`;
 }
 
 function getCoverImage(course: Course) {
-  return course.image || course.image2 || course.image3 || "/courses/placeholder.png";
+  return (
+    course.image || course.image2 || course.image3 || "/courses/placeholder.png"
+  );
 }
 
 function getLessonsCount(course: Course) {
@@ -34,8 +42,7 @@ export default function FeaturedCourses() {
   );
 
   const featured = useMemo(() => {
-    // ✅ apenas cursos em destaque
-    return courses.filter((c) => (c as any).destaque === true);
+    return courses.filter((c) => (c as CourseWithExtras).destaque === true);
   }, []);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -223,7 +230,9 @@ function CourseCard({ course }: { course: Course }) {
             <div className="flex items-center gap-3 min-w-0">
               <div className="size-9 shrink-0 rounded-full bg-[linear-gradient(135deg,rgba(0,156,249,0.25),rgba(0,169,157,0.22))] ring-1 ring-black/5" />
               <div className="text-xs leading-tight min-w-0">
-                <div className="font-semibold text-neutral-900">Equalizador</div>
+                <div className="font-semibold text-neutral-900">
+                  Equalizador
+                </div>
                 <div className="text-neutral-500">Treinamento</div>
               </div>
             </div>
@@ -240,7 +249,10 @@ function CourseCard({ course }: { course: Course }) {
               className="inline-flex w-full items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white
               bg-brand-primary shadow-brand hover:opacity-95 transition"
             >
-              Ver detalhes <span className="ml-2"><ArrowRightSmall /></span>
+              Ver detalhes{" "}
+              <span className="ml-2">
+                <ArrowRightSmall />
+              </span>
             </Link>
           </div>
         </div>
@@ -276,7 +288,13 @@ function Stars({ value }: { value: number }) {
 
 function ArrowLeft() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-neutral-900">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="text-neutral-900"
+    >
       <path
         d="M15 6l-6 6 6 6"
         stroke="currentColor"
@@ -290,7 +308,13 @@ function ArrowLeft() {
 
 function ArrowRight() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-neutral-900">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="text-neutral-900"
+    >
       <path
         d="M9 6l6 6-6 6"
         stroke="currentColor"
@@ -304,7 +328,13 @@ function ArrowRight() {
 
 function ArrowRightSmall() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="text-white"
+    >
       <path
         d="M13 5l7 7-7 7M20 12H4"
         stroke="currentColor"
@@ -318,7 +348,13 @@ function ArrowRightSmall() {
 
 function UsersMini() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-neutral-500">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="text-neutral-500"
+    >
       <path
         d="M16 11c1.7 0 3-1.6 3-3.5S17.7 4 16 4s-3 1.6-3 3.5S14.3 11 16 11ZM8 11c1.7 0 3-1.6 3-3.5S9.7 4 8 4 5 5.6 5 7.5 6.3 11 8 11Z"
         fill="currentColor"
@@ -333,7 +369,13 @@ function UsersMini() {
 
 function BookMini() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-neutral-500">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="text-neutral-500"
+    >
       <path
         d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2V5Z"
         fill="currentColor"

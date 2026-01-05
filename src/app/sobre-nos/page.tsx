@@ -3,7 +3,6 @@ import Header from "@/components/layout/Header";
 import About from "@/components/sections/About";
 import AboutFeaturedStrip from "@/components/sections/AboutFeaturedStrip";
 import Footer from "@/components/sections/Footer";
-import Instructors from "@/components/sections/Instructors";
 import MissionVisionValues from "@/components/sections/MissionVisionValues";
 import PageBanner from "@/components/sections/PageBanner";
 import Testimonials from "@/components/sections/Testimonials";

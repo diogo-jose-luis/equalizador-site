@@ -16,8 +16,16 @@ type StarVars = React.CSSProperties & {
   ["--d"]?: string;
 };
 
+type CourseExtras = {
+  description?: string;
+  destaque?: boolean;
+};
+type CourseWithExtras = Course & CourseExtras;
+
 function getCoverImage(course: Course) {
-  return course.image || course.image2 || course.image3 || "/courses/placeholder.png";
+  return (
+    course.image || course.image2 || course.image3 || "/courses/placeholder.png"
+  );
 }
 
 export default function Hero() {
@@ -36,8 +44,15 @@ export default function Hero() {
 
     // filtra por title/category/slug/description (se existir)
     const matched = courses.filter((c) => {
-      const hay = [c.title, c.category, c.slug, (c as any).description]
-        .filter(Boolean)
+      const course = c as CourseWithExtras;
+
+      const hay = [
+        course.title,
+        course.category,
+        course.slug,
+        course.description,
+      ]
+        .filter((v): v is string => typeof v === "string" && v.length > 0)
         .join(" ")
         .toLowerCase();
 
@@ -57,7 +72,9 @@ export default function Hero() {
   const onSubmit = () => {
     // Se tiver sugestões, entra na primeira
     if (results.length) {
-      goToCourse(results[Math.max(0, Math.min(activeIndex, results.length - 1))]);
+      goToCourse(
+        results[Math.max(0, Math.min(activeIndex, results.length - 1))]
+      );
       return;
     }
     // Se não tiver sugestões, podes redirecionar para /treinamentos (opcional)
@@ -128,7 +145,8 @@ export default function Hero() {
               style={{ "--delay": "0ms" } as CSSVars}
             >
               <span className="text-sm text-white/85">
-                Mais de <b className="text-white">10.000+</b> formandos impactados
+                Mais de <b className="text-white">10.000+</b> formandos
+                impactados
               </span>
               <span className="h-1.5 w-1.5 rounded-full bg-brand-secondary" />
             </div>
@@ -149,8 +167,8 @@ export default function Hero() {
               className="mt-4 sm:mt-5 text-sm sm:text-lg text-white/75 max-w-xl hero-reveal"
               style={{ "--delay": "240ms" } as CSSVars}
             >
-              Consultoria e formações em Tecnologias de Informação, com foco em resultados práticos
-              para profissionais, estudantes e empresas.
+              Consultoria e formações em Tecnologias de Informação, com foco em
+              resultados práticos para profissionais, estudantes e empresas.
             </p>
 
             {/* ✅ Autocomplete */}
@@ -175,7 +193,9 @@ export default function Hero() {
 
                       if (e.key === "ArrowDown") {
                         e.preventDefault();
-                        setActiveIndex((i) => Math.min(i + 1, results.length - 1));
+                        setActiveIndex((i) =>
+                          Math.min(i + 1, results.length - 1)
+                        );
                       } else if (e.key === "ArrowUp") {
                         e.preventDefault();
                         setActiveIndex((i) => Math.max(i - 1, 0));
@@ -215,7 +235,9 @@ export default function Hero() {
                                 onMouseEnter={() => setActiveIndex(idx)}
                                 onClick={() => goToCourse(course)}
                                 className={`w-full text-left px-3 py-2.5 flex items-center gap-3 transition ${
-                                  active ? "bg-black/[0.04]" : "hover:bg-black/[0.03]"
+                                  active
+                                    ? "bg-black/[0.04]"
+                                    : "hover:bg-black/[0.03]"
                                 }`}
                               >
                                 <div className="relative size-10 rounded-xl overflow-hidden bg-black/[0.04] ring-1 ring-black/5 shrink-0">
@@ -259,11 +281,15 @@ export default function Hero() {
               style={{ "--delay": "480ms" } as CSSVars}
             >
               <div className="flex items-center gap-3">
-                <span className="grid place-items-center size-9 rounded-full bg-white/10 ring-1 ring-white/15">✓</span>
+                <span className="grid place-items-center size-9 rounded-full bg-white/10 ring-1 ring-white/15">
+                  ✓
+                </span>
                 <span className="font-medium">Mentores Especialistas</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="grid place-items-center size-9 rounded-full bg-white/10 ring-1 ring-white/15">✓</span>
+                <span className="grid place-items-center size-9 rounded-full bg-white/10 ring-1 ring-white/15">
+                  ✓
+                </span>
                 <span className="font-medium">Suporte e Acompanhamento</span>
               </div>
             </div>
@@ -285,8 +311,12 @@ export default function Hero() {
                   </svg>
                 </div>
                 <div>
-                  <div className="text-2xl font-extrabold text-neutral-900">10K+</div>
-                  <div className="text-sm text-neutral-600">Formandos ativos</div>
+                  <div className="text-2xl font-extrabold text-neutral-900">
+                    10K+
+                  </div>
+                  <div className="text-sm text-neutral-600">
+                    Formandos ativos
+                  </div>
                 </div>
               </div>
             </div>
@@ -295,7 +325,10 @@ export default function Hero() {
             <div className="hidden sm:block absolute right-20 top-32 size-2 rounded-full bg-brand-secondary/80" />
             <div className="hidden sm:block absolute right-10 top-48 size-16 rounded-full bg-white/5 ring-1 ring-white/10" />
 
-            <div className="relative mx-auto max-w-[520px] hero-reveal hero-reveal-zoom" style={{ "--delay": "900ms" } as CSSVars}>
+            <div
+              className="relative mx-auto max-w-[520px] hero-reveal hero-reveal-zoom"
+              style={{ "--delay": "900ms" } as CSSVars}
+            >
               <div className="absolute inset-0 rounded-[40px] bg-[radial-gradient(closest-side,rgba(255,255,255,0.18),transparent)] blur-2xl" />
               <div className="relative rounded-[40px] overflow-hidden ring-1 ring-white/15 bg-white/5">
                 <Image
